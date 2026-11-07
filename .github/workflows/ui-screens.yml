@@ -1,7 +1,7 @@
 name: UI screenshots
 
 # Прогон приложения на эмуляторе Android: тест ScreenshotTour открывает экраны всех ролей
-# и снимает скриншоты. Результат — в ветке ui-screens.
+# и снимает скриншоты; схемы draw.io экспортируются в PNG. Результат — в ветке ui-screens.
 # Запуск вручную: Actions → UI screenshots → Run workflow.
 on:
   workflow_dispatch:
@@ -37,6 +37,21 @@ jobs:
       - name: Сборка APK и тестов
         run: ./gradlew assembleDebug assembleDebugAndroidTest
 
+      # схемы графической части (docs/diagrams/*.drawio) экспортируются в PNG самим draw.io Desktop
+      - name: Экспорт схем draw.io в PNG
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download -R jgraph/drawio-desktop -p 'drawio-amd64-*.deb' -D /tmp/drawio
+          sudo apt-get update -q
+          sudo apt-get install -y -q xvfb /tmp/drawio/*.deb
+          mkdir -p diagrams-png
+          for f in docs/diagrams/*.drawio; do
+            n=$(basename "$f" .drawio)
+            xvfb-run -a drawio --export --format png --scale 2 --border 16 --output "diagrams-png/$n.png" "$f" --no-sandbox --disable-gpu || true
+          done
+          ls -la diagrams-png
+
       - name: Включить KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -66,6 +81,7 @@ jobs:
           mkdir -p out
           tar -xf screens.tar -C out || true
           cp instrument.txt out/ 2>/dev/null || true
+          cp -r diagrams-png out/diagrams 2>/dev/null || true
           cd out
           git init -q -b ui-screens
           git add -A

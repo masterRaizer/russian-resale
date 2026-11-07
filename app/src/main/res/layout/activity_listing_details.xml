@@ -249,15 +249,14 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnChat"
-                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="Написать продавцу"
-                android:visibility="gone"
-                app:icon="@drawable/ic_chat"
-                app:iconPadding="0dp" />
+            android:id="@+id/btnChat"
+            style="@style/Widget.Material3.Button.IconButton.Outlined"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Написать продавцу"
+            android:visibility="gone"
+            app:icon="@drawable/ic_chat" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCart"

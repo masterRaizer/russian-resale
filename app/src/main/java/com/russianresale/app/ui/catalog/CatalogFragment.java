@@ -82,7 +82,7 @@ public class CatalogFragment extends Fragment {
         vm.getResults().observe(getViewLifecycleOwner(), list -> {
             adapter.submitList(list);
             int n = list == null ? 0 : list.size();
-            b.resultCount.setText("Найдено: " + Format.plural(n, "вещь", "вещи", "вещей"));
+            b.resultCount.setText(Format.plural(n, "вещь", "вещи", "вещей"));
             Ui.showEmpty(b.empty, n == 0, R.drawable.ic_search, "Ничего не нашлось",
                     "Попробуйте изменить запрос или сбросить фильтры");
         });
