@@ -24,7 +24,7 @@ public class LetterDrawable extends Drawable {
     public LetterDrawable(String name) {
         String n = name == null ? "" : name.replaceAll("[«»\"']", "").trim();
         letter = n.isEmpty() ? "?" : n.substring(0, 1).toUpperCase();
-        bg.setColor(COLORS[Math.abs(n.hashCode()) % COLORS.length]);
+        bg.setColor(COLORS[Math.floorMod(n.hashCode(), COLORS.length)]);
         text.setColor(Color.WHITE);
         text.setTypeface(Typeface.DEFAULT_BOLD);
         text.setTextAlign(Paint.Align.CENTER);
