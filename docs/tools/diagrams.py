@@ -57,16 +57,16 @@ def db_diagram():
             ("", "status", T), ("", "createdAt", I)]),
     }
     pos = {
-        "notifications": (20, 60), "favorites": (20, 300), "cart_items": (20, 420), "complaints": (20, 560),
-        "users": (320, 60), "listings": (320, 340),
-        "orders": (620, 60), "order_items": (620, 420),
-        "reviews": (920, 60), "chats": (920, 330), "messages": (920, 520),
+        "notifications": (20, 60), "favorites": (20, 320), "cart_items": (20, 450), "complaints": (20, 600),
+        "users": (320, 60), "listings": (320, 370),
+        "orders": (620, 60), "order_items": (620, 460),
+        "reviews": (920, 60), "chats": (920, 350), "messages": (920, 560),
     }
     W = 230
     ids, geo = {}, {}
     for key, (title, fields) in tables.items():
         x, y = pos[key]
-        h = 22 + 13 * len(fields) + 4
+        h = 26 + 14 * len(fields) + 8
         geo[key] = (x, y, W, h)
         ids[key] = d.vertex(x, y, W, h, db_table(title, fields),
                             "html=1;whiteSpace=wrap;overflow=fill;verticalAlign=top;align=left;spacing=0;"
@@ -92,20 +92,20 @@ def db_diagram():
         d.edge(ids[child], ids[parent], style, label, points)
 
     rel("notifications", "right", 100, "users", "left", 100)
-    rel("favorites", "right", 320, "users", "left", 215)
-    rel("favorites", "right", 345, "listings", "left", 360)
-    rel("cart_items", "right", 440, "users", "left", 235)
-    rel("cart_items", "right", 470, "listings", "left", 470)
-    rel("complaints", "right", 600, "listings", "left", 600)
+    rel("favorites", "right", 345, "users", "left", 230)
+    rel("favorites", "right", 370, "listings", "left", 390)
+    rel("cart_items", "right", 475, "users", "left", 250)
+    rel("cart_items", "right", 505, "listings", "left", 505)
+    rel("complaints", "right", 640, "listings", "left", 640)
     rel("listings", "top", 435, "users", "bottom", 435, "sellerId")
     rel("orders", "left", 110, "users", "right", 110, "buyerId")
     rel("orders", "left", 150, "users", "right", 150, "sellerId")
     rel("order_items", "top", 735, "orders", "bottom", 735)
-    rel("order_items", "left", 500, "listings", "right", 500)
-    rel("reviews", "left", 200, "order_items", "right", 450, "", [(885, 200), (885, 450)])
+    rel("order_items", "left", 540, "listings", "right", 540)
+    rel("reviews", "left", 200, "order_items", "right", 490, "", [(885, 200), (885, 490)])
     rel("reviews", "left", 120, "orders", "right", 120)
-    rel("chats", "left", 370, "listings", "right", 370)
-    rel("chats", "left", 345, "users", "right", 235, "", [(590, 345), (590, 235)])
+    rel("chats", "left", 410, "listings", "right", 410)
+    rel("chats", "left", 375, "users", "right", 270, "", [(590, 375), (590, 270)])
     rel("messages", "top", 1035, "chats", "bottom", 1035)
     return d
 
