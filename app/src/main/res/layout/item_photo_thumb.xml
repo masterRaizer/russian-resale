@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="104dp"
+    android:layout_height="128dp"
+    android:layout_marginEnd="8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurfaceVariant"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeRounded" />
+
+    <LinearLayout
+        android:id="@+id/addTile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_camera"
+            app:tint="?attr/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Добавить"
+            android:textColor="?attr/colorPrimary" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/coverLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="6dp"
+        android:background="@drawable/bg_chip_label"
+        android:paddingHorizontal="6dp"
+        android:text="Обложка"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/remove"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="4dp"
+        android:background="@drawable/bg_round_surface"
+        android:contentDescription="Удалить фото"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_close"
+        app:tint="#222222" />
+</FrameLayout>

@@ -1,0 +1,72 @@
+name: Release
+
+# Новая версия: git tag v1.0 && git push origin v1.0
+# или вручную: Actions → Release → Run workflow (указать тег).
+# На странице релиза появятся APK и ZIP с исходным кодом для Android Studio.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Тег релиза (например v1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@v5
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          log-accepted-android-sdk-licenses: false
+          cmdline-tools-version: "14742923"
+          packages: "platforms;android-36 build-tools;36.0.0 platform-tools"
+
+      - name: Unit-тесты и сборка APK
+        run: ./gradlew testDebugUnitTest assembleDebug
+
+      - name: Подготовка файлов релиза
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/app-debug.apk "dist/RussianResale-$TAG.apk"
+          # исходный код ровно в том виде, в котором он лежит в git (с Gradle Wrapper):
+          # распаковать и открыть папку RussianResale в Android Studio
+          git archive --format=zip --prefix=RussianResale/ -o "dist/RussianResale-$TAG-source.zip" HEAD
+          unzip -l "dist/RussianResale-$TAG-source.zip" | tail -1
+          ls -la dist
+
+      - name: Публикация релиза
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            if [ -f ".github/release-notes/$TAG.md" ]; then cat ".github/release-notes/$TAG.md"; echo; fi
+            cat <<NOTES
+          ## Файлы
+          - \`RussianResale-$TAG.apk\` — установочный файл для телефона или эмулятора (Android 8.0+).
+          - \`RussianResale-$TAG-source.zip\` — исходный код. Распакуйте и откройте папку \`RussianResale\` в Android Studio (File → Open), дождитесь Gradle Sync и запустите конфигурацию \`app\`.
+
+          Демо-аккаунты (пароль \`123456\`): \`buyer@resale.ru\` — покупатель, \`seller@resale.ru\` — продавец (ателье), \`admin@resale.ru\` — администратор.
+          NOTES
+          } > release-notes.md
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/* --clobber
+          else
+            gh release create "$TAG" dist/* --title "Русский ресейл $TAG" --target "$GITHUB_SHA" --notes-file release-notes.md
+          fi

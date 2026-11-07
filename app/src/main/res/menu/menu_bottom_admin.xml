@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_complaints" android:icon="@drawable/ic_flag" android:title="Жалобы" />
+    <item android:id="@+id/nav_admin_listings" android:icon="@drawable/ic_store" android:title="Объявления" />
+    <item android:id="@+id/nav_users" android:icon="@drawable/ic_group" android:title="Пользователи" />
+    <item android:id="@+id/nav_profile" android:icon="@drawable/ic_person" android:title="Профиль" />
+</menu>

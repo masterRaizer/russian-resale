@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_my_listings" android:icon="@drawable/ic_store" android:title="Объявления" />
+    <item android:id="@+id/nav_seller_orders" android:icon="@drawable/ic_orders" android:title="Заказы" />
+    <item android:id="@+id/nav_chats" android:icon="@drawable/ic_chat" android:title="Сообщения" />
+    <item android:id="@+id/nav_reviews" android:icon="@drawable/ic_star" android:title="Отзывы" />
+    <item android:id="@+id/nav_profile" android:icon="@drawable/ic_person" android:title="Профиль" />
+</menu>

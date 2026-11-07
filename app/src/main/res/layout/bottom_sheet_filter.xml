@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Фильтры"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/Text.Section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Для кого" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/genders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="true" />
+
+        <TextView
+            style="@style/Text.Section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Состояние" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="true" />
+
+        <TextView
+            style="@style/Text.Section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Тип" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/types"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleSelection="true" />
+
+        <TextView
+            style="@style/Text.Section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Размер и цена" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Размер (M, 44, 38 EU…)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:hint="Цена от, ₽">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/minPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="до, ₽">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/maxPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/reset"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Сбросить" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/apply"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="Показать" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

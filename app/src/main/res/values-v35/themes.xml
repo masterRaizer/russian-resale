@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android 15: классическое размещение под системными панелями (без edge-to-edge) -->
+    <style name="Theme.RussianResale" parent="Base.Theme.RussianResale">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>
