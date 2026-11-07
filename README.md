@@ -105,6 +105,10 @@ Unit-тесты бизнес-правил (`app/src/test`): валидация, 
 ./gradlew testDebugUnitTest
 ```
 
+## Документация
+
+Пояснительная записка, схемы draw.io и скриншоты — в папке [`docs/`](docs/README.md).
+
 ## Сборка в GitHub Actions
 
 - **Build APK** (`.github/workflows/build.yml`) — на каждый push: unit-тесты и debug-APK в разделе Artifacts.
